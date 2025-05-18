@@ -1,4 +1,4 @@
-# `evmfs-git`
+# `evm-git-git`
 
 universal recipe for [user repo](../themartiancompany/ur).
 
