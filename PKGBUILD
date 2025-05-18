@@ -27,19 +27,26 @@
 _os="$( \
   uname \
     -o)"
+if [[ ! -v "_hardhat" ]]; then
+  _hardhat="true"
+fi
+if [[ ! -v "_solc" ]]; then
+  _hardhat="true"
+fi
 _git='true'
 _offline='false'
-_solc="true"
-_hardhat="true"
 _proj="hip"
 _py="python"
-_pkg=evmfs
-_pkgname="${_pkg}"
-pkgname="${_pkgname}-git"
+_pkg=evm-git
+pkgname=(
+  "${_pkg}-git"
+)
 pkgver="0.0.0.0.0.0.0.0.1.1.1.1.1.1.1.1.1.1.r84.ge88abbd"
 pkgrel=1
 _pkgdesc=(
-  "Ethereum Virtual Machine network file system."
+  "Git extensions with support for"
+  "Ethereum Virtual Machine (EVM) compatible"
+  "networks remotes."
 )
 pkgdesc="${_pkgdesc[*]}"
 arch=(
@@ -58,11 +65,17 @@ license=(
   'AGPL3'
 )
 depends=(
+  "awk"
+  "coreutils"
   "evm-contracts-tools"
+  "evm-gnupg"
   "evm-wallet"
   "encoding-tools"
+  "evmfs"
+  "git"
   "libcrash-bash"
   "libcrash-js"
+  "libevm"
   "node-run"
 )
 [[ "${_os}" == 'GNU/Linux' ]] && \
@@ -75,8 +88,8 @@ makedepends=(
 )
 if [[ "${_solc}" == "true" ]]; then
   makedepends+=(
-    "solidity=0.7.5"
-    "solidity=0.8.24"
+    # "solidity=0.7.5"
+    # "solidity=0.8.24"
     "solidity=0.8.28"
   )
 fi
@@ -94,10 +107,10 @@ optdepends=(
   optdepends+=(
   )
 provides=(
-  "${_pkgname}=${pkgver}"
+  "${_pkg}=${pkgver}"
 )
 conflicts=(
-  "${_pkgname}"
+  "${_pkg}"
 )
 groups=(
  "${_proj}"
@@ -168,8 +181,7 @@ _jq_pkgver() {
         '.[0].sha')"
   printf \
     "%s.r%s.g%s" \
-    "${_version}" \
-    "${_rev}" \
+    "${_version}" \ "${_rev}" \
     "${_commit}"
 }
 
@@ -240,7 +252,7 @@ build() {
   fi
 }
 
-package() {
+package_evm-git() {
   local \
     _make_opts=()
   _make_opts=(
