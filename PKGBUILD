@@ -31,7 +31,7 @@ if [[ ! -v "_hardhat" ]]; then
   _hardhat="true"
 fi
 if [[ ! -v "_solc" ]]; then
-  _hardhat="true"
+  _solc="true"
 fi
 _git='true'
 _offline='false'
