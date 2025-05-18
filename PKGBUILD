@@ -38,6 +38,7 @@ _offline='false'
 _proj="hip"
 _py="python"
 _pkg=evm-git
+pkgbase="${_pkg}-git"
 pkgname=(
   "${_pkg}-git"
 )
