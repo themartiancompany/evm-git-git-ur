@@ -253,7 +253,7 @@ build() {
   fi
 }
 
-package_evm-git() {
+package_evm-git-git() {
   local \
     _make_opts=()
   _make_opts=(
